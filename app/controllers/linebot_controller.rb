@@ -28,7 +28,7 @@ class LinebotController < ApplicationController
           doc = REXML::Document.new(xml)
           xpath = 'weatherforecast/pref/area[4]/'
           # 当日朝のメッセージの送信の下限値は20％としているが、明日・明後日雨が降るかどうかの下限値は30％としている
-          min_per = 30
+          min_per = 40
           case input
             # 「明日」or「あした」というワードが含まれる場合
           when /.*(明日|あした).*/
@@ -38,7 +38,7 @@ class LinebotController < ApplicationController
             per18to24 = doc.elements[xpath + 'info[2]/rainfallchance/period[4]'].text
             if per06to12.to_i >= min_per || per12to18.to_i >= min_per || per18to24.to_i >= min_per
               push =
-                "明日の天気やな。\n明日は雨やで\n今のところ降水確率はこんなんや\n　  6〜12時　#{per06to12}％\n　12〜18時　 #{per12to18}％\n　18〜24時　#{per18to24}％\nまた明日の朝の最新の天気予報で雨が降りそうだったら教えるね！"
+                "明日の天気やな。\n明日は雨やで\n今のところ降水確率はこんなんや\n　  6〜12時　#{per06to12}％\n　12〜18時　 #{per12to18}％\n　18〜24時　#{per18to24}％\nまた明日の朝の最新の天気予報で雨が降りそうだったら教えたるわ"
             else
               push =
                 "明日の天気？\n明日は降らんよ\nまた明日の朝の最新の天気予報で雨が降りそうだったら教えたるさかい"
