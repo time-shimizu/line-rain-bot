@@ -25,14 +25,13 @@ task :update_feed => :environment do
   min_per = 40
   if per06to12.to_i >= min_per || per12to18.to_i >= min_per || per18to24.to_i >= min_per
     word1 =
-      ["いい朝やな",
-       "よう寝れたか？",
-       "二日酔い大丈夫かいな？",
-       "早起きしてえらいやん"].sample
+      ["合コン日和やな",
+       "次の合コンいつやっけ？",
+       "半沢直樹の上戸彩みたいな嫁はん欲しいわな"].sample
     word2 =
-      ["ほな気いつけて",
+      ["ほなまた",
        "良い一日過ごしや〜",
-       "また合コンしよや"].sample
+       "また合コン決まったら連絡するわな"].sample
     # 降水確率によってメッセージを変更する閾値の設定
     mid_per = 60
     if per06to12.to_i >= mid_per || per12to18.to_i >= mid_per || per18to24.to_i >= mid_per
