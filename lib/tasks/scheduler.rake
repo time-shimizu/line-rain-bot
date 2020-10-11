@@ -22,12 +22,13 @@ task :update_feed => :environment do
   per12to18 = doc.elements[xpath + 'period[3]'].text
   per18to24 = doc.elements[xpath + 'period[4]'].text
   # メッセージを発信する降水確率の下限値の設定
-  min_per = 40
+  min_per = 50
   if per06to12.to_i >= min_per || per12to18.to_i >= min_per || per18to24.to_i >= min_per
     word1 =
-      ["合コン日和やな",
-       "次の合コンいつやっけ？",
-       "半沢直樹の上戸彩みたいな嫁はん欲しいわな"].sample
+      ["調子はどうや？ワイは昨日もトレーナーに内緒で二郎食べてしもたで",
+       "おはようさん",
+       "そろそろサウナいこや",
+       "大山にホームラン王撮って欲しいわな"].sample
     word2 =
       ["ほなまた",
        "良い一日過ごしや〜",
