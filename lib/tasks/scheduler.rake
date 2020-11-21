@@ -12,9 +12,13 @@ task :update_feed => :environment do
 
   # 使用したxmlデータ（毎日朝6時更新）：以下URLを入力すれば見ることができます。
   url  = "https://www.drk7.jp/weather/xml/13.xml"
+  colona_url = "https://www.nippon.com/ja/googleNews.xml"
   # xmlデータをパース（利用しやすいように整形）
   xml  = open( url ).read.toutf8
+  colona_xml = open( colona_url ).read.toutf8
+
   doc = REXML::Document.new(xml)
+  colona_doc = REXML::Document.new(colona_xml)
   # パスの共通部分を変数化（area[4]は「東京地方」を指定している）
   xpath = 'weatherforecast/pref/area[4]/info/rainfallchance/'
   # 6時〜12時の降水確率（以下同様）
@@ -23,6 +27,16 @@ task :update_feed => :environment do
   per18to24 = doc.elements[xpath + 'period[4]'].text
   # メッセージを発信する降水確率の下限値の設定
   min_per = 50
+  i = 1
+  counter = false
+  while counter == false
+    title = colona_doc.elements["urlset/url[#{i}]/news:news/news:title"].text
+    if title.include?('コロナ')
+      colona_news_url = colona_doc.elements["urlset/url[#{i}]/loc"].text
+      counter = true
+    end
+    i += 1
+  end
   if per06to12.to_i >= min_per || per12to18.to_i >= min_per || per18to24.to_i >= min_per
     word1 =
       ["調子はどうや？ワイは昨日もトレーナーに内緒で二郎食べてしもたで",
