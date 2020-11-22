@@ -38,6 +38,7 @@ task :update_feed => :environment do
     i += 1
   end
   push ="最新のコロナニュースやで、みんな気ぃつけてや〜\n#{colona_news_url}\n"
+  weather_push = '今日は雨は降らんで〜'
   if per06to12.to_i >= min_per || per12to18.to_i >= min_per || per18to24.to_i >= min_per
     word1 =
       ["調子はどうや？ワイは昨日もトレーナーに内緒で二郎食べてしもたで",
@@ -56,11 +57,12 @@ task :update_feed => :environment do
       word3 = "折り畳み傘あってもええかもな"
     end
     # 発信するメッセージの設定
-    push +=
+    weather_push =
       "#{word1}\n#{word3}\n降水確率はこんな感じやで。\n　  6〜12時　#{per06to12}％\n　12〜18時　 #{per12to18}％\n　18〜24時　#{per18to24}％\n#{word2}"
     # メッセージの発信先idを配列で渡す必要があるため、userテーブルよりpluck関数を使ってidを配列で取得
   end
   user_ids = User.all.pluck(:line_id)
+  push += weather_push
   message = {
     type: 'text',
     text: push
