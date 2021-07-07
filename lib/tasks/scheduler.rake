@@ -41,10 +41,10 @@ task :update_feed => :environment do
   weather_push = '今日は雨は降らんで〜'
   if per06to12.to_i >= min_per || per12to18.to_i >= min_per || per18to24.to_i >= min_per
     word1 =
-      ["調子はどうや？ワイは昨日もトレーナーに内緒で二郎食べてしもたで",
+      ["あかん、優勝してまう",
        "おはようさん",
        "そろそろサウナいこや",
-       "大山にホームラン王撮って欲しいわな"].sample
+       "サトテル最高や！"].sample
     word2 =
       ["ほなまた",
        "良い一日過ごしや〜",
