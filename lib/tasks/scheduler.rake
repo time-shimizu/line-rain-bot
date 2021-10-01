@@ -1,4 +1,4 @@
-desc "This task is called by the Heroku scheduler add-on"
+desc 'This task is called by the Heroku scheduler add-on'
 task :update_feed => :environment do
   require 'line/bot'  # gem 'line-bot-api'
   require 'open-uri'
@@ -6,12 +6,12 @@ task :update_feed => :environment do
   require 'rexml/document'
 
   client ||= Line::Bot::Client.new { |config|
-    config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
-    config.channel_token = ENV["LINE_CHANNEL_TOKEN"]
+    config.channel_secret = ENV['LINE_CHANNEL_SECRET']
+    config.channel_token = ENV['LINE_CHANNEL_TOKEN']
   }
 
   # 使用したxmlデータ（毎日朝6時更新）：以下URLを入力すれば見ることができます。
-  url  = "https://www.drk7.jp/weather/xml/13.xml"
+  url  = 'https://www.drk7.jp/weather/xml/13.xml'
   # xmlデータをパース（利用しやすいように整形）
   xml  = open( url ).read.toutf8
 
