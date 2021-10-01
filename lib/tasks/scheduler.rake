@@ -38,13 +38,13 @@ task :update_feed => :environment do
     # 降水確率によってメッセージを変更する閾値の設定
     mid_per = 70
     if per06to12.to_i >= mid_per || per12to18.to_i >= mid_per || per18to24.to_i >= mid_per
-      word3 = "雨ふるかもやから傘持ってきや"
+      word_3 = "雨ふるかもやから傘持ってきや"
     else
-      word3 = "折り畳み傘あってもええかもな"
+      word_3 = "折り畳み傘あってもええかもな"
     end
     # 発信するメッセージの設定
     push =
-      "ワイはもうワクチン打ったやで!\n #{word_1}\n#{word3}\n降水確率はこんな感じやで。\n　  6〜12時　#{per06to12}％\n　12〜18時　 #{per12to18}％\n　18〜24時　#{per18to24}％\n#{word_2}"
+      "ワイはもうワクチン打ったやで!\n #{word_1}\n#{word_3}\n降水確率はこんな感じやで。\n　  6〜12時　#{per06to12}％\n　12〜18時　 #{per12to18}％\n　18〜24時　#{per18to24}％\n#{word_2}"
     # メッセージの発信先idを配列で渡す必要があるため、userテーブルよりpluck関数を使ってidを配列で取得
     user_ids = User.all.pluck(:line_id)
     message = {
